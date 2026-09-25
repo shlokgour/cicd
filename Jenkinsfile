@@ -4,6 +4,7 @@ pipeline {
     environment {
         IMAGE_TAG = "${env.BUILD_NUMBER}"
         DOCKER = '"C:\\Users\\Appex\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe"'
+        COMPOSE = '"C:\\Users\\Appex\\AppData\\Local\\Programs\\DockerDesktop\\resources\\cli-plugins\\docker-compose.exe"'
     }
 
     stages {
@@ -22,8 +23,8 @@ pipeline {
 
         stage('Deploy (Compose)') {
             steps {
-                bat '%DOCKER% compose down'
-                bat '%DOCKER% compose up -d --build'
+                bat '%COMPOSE% down'
+                bat '%COMPOSE% up -d --build'
             }
         }
     }
