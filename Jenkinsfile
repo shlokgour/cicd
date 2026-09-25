@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         IMAGE_TAG = "${env.BUILD_NUMBER}"
+        DOCKER = '"C:\\Users\\Appex\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe"'
     }
 
     stages {
@@ -14,15 +15,15 @@ pipeline {
 
         stage('Build Images') {
             steps {
-                bat 'docker build -t course-service:%IMAGE_TAG% ./course-service'
-                bat 'docker build -t student-service:%IMAGE_TAG% ./student-service'
+                bat '%DOCKER% build -t course-service:%IMAGE_TAG% ./course-service'
+                bat '%DOCKER% build -t student-service:%IMAGE_TAG% ./student-service'
             }
         }
 
         stage('Deploy (Compose)') {
             steps {
-                bat 'docker compose down'
-                bat 'docker compose up -d --build'
+                bat '%DOCKER% compose down'
+                bat '%DOCKER% compose up -d --build'
             }
         }
     }
