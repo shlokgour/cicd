@@ -1,12 +1,12 @@
-version: "3.9"
+FROM python:3.11-slim
 
-services:
-  course-service:
-    build: ./course-service
-    ports:
-      - "5001:5001"
+WORKDIR /app
 
-  student-service:
-    build: ./student-service
-    ports:
-      - "5002:5002"
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+EXPOSE 5002
+
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "5002"]
