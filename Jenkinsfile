@@ -14,15 +14,15 @@ pipeline {
 
         stage('Build Images') {
             steps {
-                sh 'docker build -t course-service:$IMAGE_TAG ./course-service'
-                sh 'docker build -t student-service:$IMAGE_TAG ./student-service'
+                bat 'docker build -t course-service:%IMAGE_TAG% ./course-service'
+                bat 'docker build -t student-service:%IMAGE_TAG% ./student-service'
             }
         }
 
         stage('Deploy (Compose)') {
             steps {
-                sh 'docker compose down || true'
-                sh 'docker compose up -d --build'
+                bat 'docker compose down'
+                bat 'docker compose up -d --build'
             }
         }
     }
