@@ -1,0 +1,12 @@
+version: "3.9"
+
+services:
+  course-service:
+    build: ./course-service
+    ports:
+      - "5001:5001"
+
+  student-service:
+    build: ./student-service
+    ports:
+      - "5002:5002"
